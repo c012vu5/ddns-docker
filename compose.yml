@@ -1,0 +1,21 @@
+services:
+  ddns:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - ACC
+        - PASS
+    container_name: ddns
+    hostname: ddns
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "10"
+    volumes:
+      - type: bind
+        source: /etc/ssl/certs/ca-certificates.crt
+        target: /etc/ssl/certs/ca-certificates.crt
+        read_only: true
