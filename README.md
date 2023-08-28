@@ -4,10 +4,10 @@
 Notify global IP to mydns.
 
 ## Usage
-Copy `.env.example` to `.env` and fill in the blanks.
+Copy `env.example` to `.env` and fill in the blanks.
 
 ```console
-$ cat .env.example
+$ cat env.example
 # Enter your mydns account.
 ACC=
 
