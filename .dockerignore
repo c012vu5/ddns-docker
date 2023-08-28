@@ -1,3 +1,6 @@
-.env.example
+env.example
 .git
+.github
 .gitignore
+LICENSE
+README.md
