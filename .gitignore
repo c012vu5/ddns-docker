@@ -1,2 +1,5 @@
+# General ignored files
 *~
+
+# Not mounted exceptionally
 .env

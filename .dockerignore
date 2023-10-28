@@ -1,6 +1,9 @@
-env.example
+# General ignored files
 .git
 .github
 .gitignore
 LICENSE
 README.md
+
+# Host side scripts
+init.sh
