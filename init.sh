@@ -13,4 +13,4 @@ EOF
     echo "Initialize .env has been completed."
 fi
 
-echo -e "Edit it as you wish.\n"
+echo Edit it as you wish.
