@@ -2,10 +2,12 @@ package main
 
 import (
     "fmt"
+    "io/ioutil"
     "math/rand"
     "net/http"
     "os"
     "os/signal"
+    "regexp"
     "syscall"
     "time"
 )
@@ -55,7 +57,12 @@ func pulse() {
     defer resp.Body.Close()
 
     if resp.StatusCode == http.StatusOK {
-        fmt.Println("ADDRESS update success.")
+        remoteAddr, err := getRemoteAddr(resp)
+        if err != nil {
+            fmt.Println("Error getting remote address:", err)
+            return
+        }
+        fmt.Println("ADDRESS update success:", remoteAddr)
     } else {
         fmt.Println("ADDRESS update failure.")
     }
@@ -64,4 +71,21 @@ func pulse() {
 func getRandomWaitSec() int {
     waitSec := rand.Intn(601) + 600
     return waitSec
+}
+
+func getRemoteAddr(resp *http.Response) (string, error) {
+    body, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        fmt.Println("Error reading response:", err)
+        return "", err
+    }
+
+    bodyStr := string(body)
+    re := regexp.MustCompile(`<DT>REMOTE ADDRESS:</DT><DD>([^<]+)</DD>`)
+    match := re.FindStringSubmatch(bodyStr)
+    if len(match) == 2 {
+        return match[1], nil
+    }
+
+    return "", fmt.Errorf("Remote address not found")
 }
