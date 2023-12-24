@@ -4,8 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - ACC
-        - PASS
+        ACC:
+        PASS:
     container_name: ddns
     hostname: ddns
     restart: always
