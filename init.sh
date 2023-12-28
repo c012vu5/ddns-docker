@@ -3,13 +3,7 @@
 if [ -e .env ]; then
     echo "Initialize .env has already been completed."
 else
-    cat > .env << EOF
-# Enter your mydns account.
-ACC=
-
-# Enter your mydns password.
-PASS=
-EOF
+    cp .env.template .env
     echo "Initialize .env has been completed."
 fi
 
